@@ -1,0 +1,298 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sai Royal Spa</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+font-family:'Playfair Display', serif;
+}
+
+body{
+background:#0d0d0d;
+color:#f5f5f5;
+overflow-x:hidden;
+}
+
+/* LOADING SCREEN */
+#loader{
+position:fixed;
+width:100%;
+height:100vh;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+#loader h1{
+color:gold;
+font-size:22px;
+letter-spacing:2px;
+animation:blink 1.5s infinite;
+}
+
+@keyframes blink{
+0%,100%{opacity:1;}
+50%{opacity:0.5;}
+}
+
+/* SPLASH */
+#splash{
+position:fixed;
+width:100%;
+height:100vh;
+background:#000;
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:9998;
+opacity:0;
+animation:showSplash 3s forwards;
+animation-delay:2s;
+}
+
+#splash h1{
+font-size:60px;
+color:gold;
+letter-spacing:6px;
+text-shadow:0 0 15px gold, 0 0 30px gold;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px gold;}
+to{text-shadow:0 0 25px gold;}
+}
+
+@keyframes showSplash{
+to{opacity:1;}
+}
+
+/* HEADER */
+header{
+text-align:center;
+padding:120px 20px 60px;
+}
+
+header h1{
+font-size:50px;
+color:#d4af37;
+-webkit-text-stroke:1px #fff;
+letter-spacing:4px;
+margin-bottom:20px;
+}
+
+header p{
+max-width:600px;
+margin:auto;
+line-height:1.7;
+color:#ccc;
+}
+
+/* PACKAGES */
+.section{
+padding:60px 20px;
+text-align:center;
+}
+
+.packages{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+margin-top:40px;
+}
+
+.card{
+background:#1a1a1a;
+padding:30px;
+width:280px;
+border:1px solid #333;
+transition:0.4s;
+opacity:0;
+transform:translateY(40px);
+}
+
+.card.visible{
+opacity:1;
+transform:translateY(0);
+}
+
+.card:hover{
+border:1px solid #d4af37;
+transform:translateY(-8px);
+}
+
+.card h3{
+color:#d4af37;
+margin-bottom:15px;
+}
+
+.price{
+margin-top:15px;
+font-style:italic;
+color:#aaa;
+}
+
+/* BUTTON */
+button{
+margin-top:40px;
+padding:15px 40px;
+background:transparent;
+color:#d4af37;
+border:1px solid #d4af37;
+cursor:pointer;
+font-size:16px;
+transition:0.4s;
+}
+
+button:hover{
+background:#d4af37;
+color:#000;
+}
+
+#reveal{
+margin-top:30px;
+font-size:22px;
+color:gold;
+display:none;
+}
+
+/* HEARTS */
+.heart{
+position:fixed;
+bottom:-10px;
+color:rgba(212,175,55,0.3);
+animation:float 6s linear infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0) scale(1);}
+100%{transform:translateY(-100vh) scale(1.5);}
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADER -->
+<div id="loader">
+<h1>Preparing Private Suite…</h1>
+</div>
+
+<!-- SPLASH -->
+<div id="splash">
+<h1>AARTHY</h1>
+</div>
+
+<header>
+<h1>Sai Royal Spa</h1>
+<p>
+Where elegance meets devotion.  
+Every treatment is crafted exclusively for the queen who already owns my heart.
+</p>
+</header>
+
+<section class="section">
+<h2>Private Luxury Experiences</h2>
+
+<div class="packages">
+
+<div class="card">
+<h3>Queen’s Pedicure Ritual</h3>
+<p>Luxury foot care followed by forehead kisses.</p>
+<div class="price">7 gentle kisses</div>
+</div>
+
+<div class="card">
+<h3>Princess Serenity Package</h3>
+<p>Pedicure + shoulder massage + endless admiration.</p>
+<div class="price">Unlimited cuddles</div>
+</div>
+
+<div class="card">
+<h3>Angry Bird Cool Down</h3>
+<p>Emergency hug therapy & mood restoration service.</p>
+<div class="price">1 tight hug</div>
+</div>
+
+<div class="card">
+<h3>Royal Head Massage</h3>
+<p>Relaxing head massage with whispered “I love you”.</p>
+<div class="price">5 forehead kisses</div>
+</div>
+
+<div class="card">
+<h3>Golden Goddess Glow</h3>
+<p>Complete pampering with hand-holding session.</p>
+<div class="price">Soft smiles</div>
+</div>
+
+<div class="card">
+<h3>Forever Mine Package</h3>
+<p>Lifetime premium membership of my heart.</p>
+<div class="price">Already paid</div>
+</div>
+
+</div>
+
+<button onclick="revealLove()">Book Private Suite</button>
+
+<div id="reveal">
+You already own my heart. 🤍
+</div>
+
+</section>
+
+<script>
+
+/* REMOVE LOADER */
+setTimeout(()=>{
+document.getElementById("loader").style.display="none";
+},2000);
+
+/* SCROLL FADE */
+const cards=document.querySelectorAll('.card');
+
+window.addEventListener('scroll',()=>{
+cards.forEach(card=>{
+const top=card.getBoundingClientRect().top;
+if(top<window.innerHeight-50){
+card.classList.add('visible');
+}
+});
+});
+
+/* REVEAL */
+function revealLove(){
+document.getElementById("reveal").style.display="block";
+}
+
+/* FLOATING HEARTS */
+setInterval(()=>{
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="♥";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+10)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},6000);
+},500);
+
+</script>
+
+</body>
+</html>
